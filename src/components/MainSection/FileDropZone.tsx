@@ -1,10 +1,23 @@
-import {useState} from "react";
+import {useState, type DragEvent} from "react";
 
 export function FileDropzone() {
   const [fileName, setFileName] = useState<string | null>(null);
 
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    const file = e.dataTransfer.files[0];
+
+    if (file && file.name.endsWith(".csv")) {
+      setFileName(file.name);
+    }
+  };
+
+
   return (
     <div
+      onDrop={handleDrop}
+      onDragOver={(e) => e.preventDefault()}
       className="border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center  hover:cursor-pointer"
     >
       <p className="text-gray-600 text-lg pb-10">
@@ -15,6 +28,7 @@ export function FileDropzone() {
         type="file"
         className="hidden"
         id="fileInput"
+        accept=".csv"
         onChange={(e) =>
           setFileName(e.target.files?.[0].name || null)
         }
