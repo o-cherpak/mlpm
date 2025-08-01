@@ -5,7 +5,7 @@ type UploadedFileInfoProps = {
 export function UploadedFileInfo({ file }: Readonly<UploadedFileInfoProps>) {
   return (
     <div className="bg-white shadow-lg rounded-xl p-6 w-64 border border-gray-200">
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">File Information</h3>
+      <h3 className="text-center text-lg font-semibold text-black mb-4">File Information</h3>
 
       <div className="space-y-2 text-gray-700">
         <p>

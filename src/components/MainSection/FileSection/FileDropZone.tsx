@@ -1,4 +1,5 @@
 import {type ChangeEvent, type DragEvent, useState} from "react";
+import {FaCheck} from "react-icons/fa";
 
 type FileDropzoneProps = {
   setFileParam: (file: File) => void;
@@ -16,8 +17,6 @@ export function FileDropzone({setFileParam}: Readonly<FileDropzoneProps>) {
 
   const handeChooseFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      e.preventDefault();
-
       setFileParam(e.target.files[0]);
       setFile(e.target.files[0]);
     }
@@ -29,8 +28,9 @@ export function FileDropzone({setFileParam}: Readonly<FileDropzoneProps>) {
       onDragOver={(e) => e.preventDefault()}
       className="border-2 border-dashed border-gray-300 shadow-lg rounded-2xl p-8 text-center  hover:cursor-pointer"
     >
-      <p className={`text-lg pb-10 ${file ? "text-green-600" : "text-gray-600 "}`}>
+      <p className={`flex items-center gap-2 text-lg pb-10 ${file ? "text-green-600" : "text-gray-600 "}`}>
         {file ? "Your file is successful uploaded" : "Drag & Drop your file here or click to start"}
+        {file && <FaCheck />}
       </p>
 
       <input

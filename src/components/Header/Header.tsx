@@ -12,7 +12,7 @@ export function Header() {
       className="flex justify-between items-center px-6 md:px-12 py-4
     bg-white/70 backdrop-blur-lg shadow-lg rounded-2xl border border-white/20 z-50 transition-all"
     >
-      <div className="flex items-center gap-3">
+      <div className="flex gap-3">
         <Logo />
 
         <h1
