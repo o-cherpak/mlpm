@@ -1,4 +1,4 @@
-import {FileDropzone} from "./FileDropZone.tsx";
+import {FileSection} from "./FileSection/FileSection.tsx";
 
 export function MainSection() {
   return (
@@ -10,12 +10,12 @@ export function MainSection() {
           Machine Learning Professionals Manage
         </h1>
 
-        <p className="mt-6 text-lg md:text-xl text-gray-700">
+        <p className="pt-6 text-lg md:text-xl text-gray-700">
           A modern tool that allows users to upload, inspect, and compare experiment logs with ease and clarity.
         </p>
       </div>
 
-      <FileDropzone/>
+      <FileSection/>
     </main>
   );
 }
