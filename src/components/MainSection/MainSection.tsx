@@ -7,7 +7,7 @@ export function MainSection() {
       <div className="max-w-3xl">
         <h1
           className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight">
-          Simple frontend application
+          Machine Learning Professionals Manage
         </h1>
 
         <p className="mt-6 text-lg md:text-xl text-gray-700">
