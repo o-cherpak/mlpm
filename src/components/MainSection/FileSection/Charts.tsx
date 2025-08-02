@@ -1,12 +1,13 @@
 import type {ExperimentGroups} from "../../../interfaces/GroupedDataInterface.ts";
 
 type ChartProps = {
-  groupedDataByExperiment: ExperimentGroups
+  data: ExperimentGroups
 }
 
-export function Charts({groupedDataByExperiment}: Readonly<ChartProps>) {
+export function Charts({data}: Readonly<ChartProps>) {
   return (
     <div>
+
     </div>
   )
 }

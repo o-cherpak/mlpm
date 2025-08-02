@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import Papa from "papaparse";
 import type {ExperimentLog} from "../../../interfaces/FileInterface.ts";
 import type {ExperimentGroups} from "../../../interfaces/GroupedDataInterface.ts";
-import {FileDisplayer} from "./FileDisplayer.tsx";
 import {groupData} from "../../../services/GroupData.ts";
 
 type FileReaderProps = {
@@ -35,7 +34,6 @@ export function FileReader({file}: Readonly<FileReaderProps>) {
 
   return (
     <div>
-      <FileDisplayer data={groupedData}/>
 
     </div>
   );
