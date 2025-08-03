@@ -45,7 +45,7 @@ export function GuideSection() {
           <div
             key={index}
             className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-2xl transition transform
-            hover:translate-y-1.5"
+            hover:-translate-y-1.5"
           >
 
             <div className="text-center flex justify-center gap-4 mb-3">
