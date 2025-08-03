@@ -1,4 +1,5 @@
 import {FileSection} from "./ChartsSection/FileSection.tsx";
+import {GuideSection} from "./GuideSection.tsx";
 
 export function MainSection() {
   return (
@@ -17,7 +18,7 @@ export function MainSection() {
 
       <FileSection/>
 
-
+      <GuideSection />
     </main>
   );
 }
