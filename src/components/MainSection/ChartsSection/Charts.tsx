@@ -1,18 +1,6 @@
 import ReactECharts from "echarts-for-react";
 import {ClipLoader} from "react-spinners";
-
-interface ExperimentLog {
-  experiment_id: string;
-  metric_name: string;
-  step: number;
-  value: number;
-}
-
-interface MetricGroups {
-  [metric: string]: {
-    [experimentId: string]: ExperimentLog[];
-  };
-}
+import type {MetricGroups} from "../../../interfaces/GroupedDataInterface.ts";
 
 interface ChartsProps {
   data: MetricGroups;

@@ -26,10 +26,12 @@ export function FileDropzone({setFileParam}: Readonly<FileDropzoneProps>) {
     <div
       onDrop={handleDrop}
       onDragOver={(e) => e.preventDefault()}
-      className={`border-2 w-full space-y-4 md:w-2/3 ${file ? "pb-8" : "pb-10 lg:pb-20"} border-dashed border-gray-300 shadow-lg rounded-2xl lg:p-8 p-6 text-center hover:cursor-pointer`}
+      className={`border-2 w-full space-y-4 md:w-2/3 ${file ? "pb-8" : "pb-10 lg:pb-20"} 
+      border-dashed border-gray-300 shadow-lg rounded-2xl lg:p-8 p-6 text-center hover:cursor-pointer`}
     >
       <p
-        className={`flex flex-col lg:flex-row ${file ? "h-20" : "h-24 lg:h-40"} items-center justify-center gap-2 text-lg ${file ? "text-green-600" : "text-gray-600 "}`}>
+        className={`flex flex-col lg:flex-row ${file ? "h-20" : "h-24 lg:h-40"} items-center 
+        justify-center gap-2 text-lg ${file ? "text-green-600" : "text-gray-600 "}`}>
         {file ? "Your file is uploaded" : "Drag & Drop your file here or click to start"}
         {file && <FaCheck/>}
       </p>

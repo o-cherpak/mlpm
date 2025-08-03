@@ -1,7 +1,7 @@
 import {FileDropzone} from "./FileDropZone.tsx";
 import {useState} from "react";
 import {UploadedFileInfo} from "./UploadedFileInfo.tsx";
-import {ReaderAndDisplayer} from "./ReaderAndDisplayer.tsx";
+import {ExperimentVisualizer} from "./ExperimentVisualizer.tsx";
 
 export function FileSection() {
   const [file, setFile] = useState<File | null>(null);
@@ -14,7 +14,7 @@ export function FileSection() {
         {file && <UploadedFileInfo file={file}/>}
       </div>
 
-      {file && <ReaderAndDisplayer file={file}/>}
+      {file && <ExperimentVisualizer file={file}/>}
     </section>
   )
 }

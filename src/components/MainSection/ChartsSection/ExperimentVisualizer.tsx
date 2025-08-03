@@ -11,7 +11,7 @@ type FileReaderProps = {
   file: File;
 };
 
-export function ReaderAndDisplayer({ file }: Readonly<FileReaderProps>) {
+export function ExperimentVisualizer({ file }: Readonly<FileReaderProps>) {
   const [groupedData, setGroupedData] = useState<MetricGroups>({});
   const [selectedExperiments, setSelectedExperiments] = useState<string[]>([]);
 

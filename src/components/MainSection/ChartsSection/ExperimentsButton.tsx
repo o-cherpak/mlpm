@@ -15,10 +15,10 @@ export function ExperimentsButton({allExperiments, onClick, selectedExperiments}
           <button
             key={expId}
             onClick={() => onClick(expId)}
-            className={`px-4 py-2 rounded-lg border hover:cursor-pointer ${
+            className={`px-4 py-2 rounded-lg border hover:cursor-pointer transition-colors duration-200 ${
               selectedExperiments.includes(expId)
-                ? "bg-blue-500 text-white"
-                : "bg-gray-100 hover:bg-gray-300"
+                ? "bg-blue-700 text-white"
+                : "bg-gray-100 hover:bg-blue-600 hover:text-white"
             }`}
           >
             {expId}
