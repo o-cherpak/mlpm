@@ -1,4 +1,4 @@
-import {FileSection} from "./FileSection/FileSection.tsx";
+import {FileSection} from "./ChartsSection/FileSection.tsx";
 
 export function MainSection() {
   return (
@@ -16,6 +16,8 @@ export function MainSection() {
       </div>
 
       <FileSection/>
+
+
     </main>
   );
 }

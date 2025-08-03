@@ -10,7 +10,7 @@ type FileReaderProps = {
   file: File;
 };
 
-export function FileReader({ file }: Readonly<FileReaderProps>) {
+export function ReaderAndDisplayer({ file }: Readonly<FileReaderProps>) {
   const [groupedData, setGroupedData] = useState<MetricGroups>({});
   const [selectedExperiments, setSelectedExperiments] = useState<string[]>([]);
 
@@ -40,7 +40,7 @@ export function FileReader({ file }: Readonly<FileReaderProps>) {
   );
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center w-full items-center">
 
       <ExperimentsButton
         allExperiments={allExperiments}

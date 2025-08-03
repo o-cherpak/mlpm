@@ -27,7 +27,7 @@ export function Charts({data, metrics, experiments}: Readonly<ChartsProps>) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full px-6 lg:px-12 py-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full px-4 lg:px-8 py-4">
       {metrics.map((metric) => {
         const metricData = data[metric] || {};
 
@@ -46,7 +46,7 @@ export function Charts({data, metrics, experiments}: Readonly<ChartsProps>) {
           title: {
             text: metric.toUpperCase(),
             left: "right",
-            textStyle: {fontSize: 16, fontWeight: 600, color: "#000"},
+            textStyle: {fontSize: 14, fontWeight: 600, color: "#000"},
           },
           tooltip: {trigger: "axis"},
           legend: {
@@ -75,11 +75,11 @@ export function Charts({data, metrics, experiments}: Readonly<ChartsProps>) {
         return (
           <div
             key={metric}
-            className="bg-white shadow-lg rounded-xl p-4 border border-gray-200"
+            className="bg-white shadow-lg rounded-xl p-4 border border-gray-200 w-full"
           >
             <ReactECharts
               option={option}
-              style={{width: "580px", height: "350px"}}
+              style={{width: "100%", height: "320px"}}
               notMerge={true}
               lazyUpdate={true}
             />
