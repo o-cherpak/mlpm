@@ -5,6 +5,7 @@ import { Charts } from "./Charts";
 import { groupDataByMetric } from "../../../services/GroupData";
 import type { MetricGroups } from "../../../interfaces/GroupedDataInterface.ts";
 import {ExperimentsButton} from "./ExperimentsButton.tsx";
+import {toast, Toaster} from "react-hot-toast";
 
 type FileReaderProps = {
   file: File;
@@ -23,7 +24,14 @@ export function ReaderAndDisplayer({ file }: Readonly<FileReaderProps>) {
       dynamicTyping: true,
       complete: (results) => {
         setGroupedData(groupDataByMetric(results.data));
+        toast.dismiss();
+        toast.success('File successfully parsed!');
+
       },
+      error: (error) => {
+        toast.dismiss();
+        toast.error(`Error parsing file's data: ${error.message}`);
+      }
     });
   }, [file]);
 
@@ -40,7 +48,9 @@ export function ReaderAndDisplayer({ file }: Readonly<FileReaderProps>) {
   );
 
   return (
+
     <div className="flex flex-col justify-center w-full items-center">
+      <div><Toaster position="top-left"/></div>
 
       <ExperimentsButton
         allExperiments={allExperiments}

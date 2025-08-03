@@ -30,7 +30,7 @@ export function FileDropzone({setFileParam}: Readonly<FileDropzoneProps>) {
     >
       <p
         className={`flex flex-col lg:flex-row ${file ? "h-20" : "h-24 lg:h-40"} items-center justify-center gap-2 text-lg ${file ? "text-green-600" : "text-gray-600 "}`}>
-        {file ? "Your file is successful uploaded" : "Drag & Drop your file here or click to start"}
+        {file ? "Your file is uploaded" : "Drag & Drop your file here or click to start"}
         {file && <FaCheck/>}
       </p>
 
