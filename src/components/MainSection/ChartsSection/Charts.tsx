@@ -57,7 +57,6 @@ export function Charts({data, metrics, experiments}: Readonly<ChartsProps>) {
           },
           dataZoom: [
             {type: "inside"},
-            {type: "slider", height: 15},
           ],
           series,
         };

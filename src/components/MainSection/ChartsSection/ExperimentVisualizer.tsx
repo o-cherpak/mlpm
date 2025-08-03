@@ -26,7 +26,6 @@ export function ExperimentVisualizer({ file }: Readonly<FileReaderProps>) {
         setGroupedData(groupDataByMetric(results.data));
         toast.dismiss();
         toast.success('File successfully parsed!');
-
       },
       error: (error) => {
         toast.dismiss();
