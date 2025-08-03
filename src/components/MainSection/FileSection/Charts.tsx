@@ -1,66 +1,91 @@
-import {CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis} from "recharts";
-import type {ExperimentGroups} from "../../../interfaces/GroupedDataInterface.ts";
-import type {ExperimentLog} from "../../../interfaces/FileInterface.ts";
+import ReactECharts from "echarts-for-react";
 
-type ChartsProps = {
-  groupedData: ExperimentGroups;
-  selectedMetrics: string;
-  selectedExperiments: string[];
-};
-
-type MergedPoint = {
+interface ExperimentLog {
+  experiment_id: string;
+  metric_name: string;
   step: number;
-  [experimentId: string]: number | null;
-};
+  value: number;
+}
 
-export function Charts({groupedData, selectedMetrics, selectedExperiments}: ChartsProps) {
-  const baseData = groupedData[selectedExperiments[0]]?.[selectedMetrics];
+interface MetricGroups {
+  [metric: string]: {
+    [experimentId: string]: ExperimentLog[];
+  };
+}
 
-  if (!baseData || baseData.length === 0) return null;
-  if (selectedExperiments.length === 0) return null;
+interface ChartsProps {
+  data: MetricGroups;
+  metrics: string[];
+  experiments: string[];
+}
 
-  console.log("baseData", baseData);
+const COLORS = ["#5470C6", "#91CC75", "#EE6666", "#FAC858"];
 
-
-  const stepSize = 10;
-
-  const sampledData: ExperimentLog[] = [];
-  for (let i = 0; i < baseData.length; i += stepSize) {
-    sampledData.push(baseData[i]);
+export function Charts({ data, metrics, experiments }: ChartsProps) {
+  if (!metrics || metrics.length === 0) {
+    return <p className="text-gray-500">Loading...</p>;
   }
 
-  const mergedData: MergedPoint[] = sampledData.map(point => {
-    const item: MergedPoint = {step: point.step};
-
-    selectedExperiments.forEach(expId => {
-      const experimentPoints = groupedData[expId]?.[selectedMetrics];
-      const found = experimentPoints.find(p => p.step === point.step);
-      item[expId] = found ? found.value : null;
-    });
-
-    return item;
-  });
-
-  console.log("mergedData", mergedData);
-
   return (
-    <LineChart width={720} height={480} data={mergedData}>
-      <CartesianGrid strokeDasharray="3 3"/>
-      <XAxis dataKey="step"/>
-      <YAxis/>
-      <Tooltip/>
-      {selectedExperiments.map((experimentId, index) => (
-        <Line
-          key={experimentId}
-          type="monotone"
-          dataKey={experimentId}
-          name={`Experiment ${experimentId}`}
-          stroke={["#8884d8", "#82ca9d", "#ff7300"][index % 3]}
-          dot={false}
-          isAnimationActive={false}
-          connectNulls={true}
-        />
-      ))}
-    </LineChart>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full px-6 lg:px-12 py-6">
+      {metrics.map((metric) => {
+        const metricData = data[metric] || {};
+
+        const series = experiments.map((expId, idx) => ({
+          name: expId,
+          type: "line",
+          showSymbol: false,
+          data: metricData[expId]
+            ? metricData[expId].map((log) => [log.step, log.value])
+            : [],
+          color: COLORS[idx % COLORS.length],
+          animation: false,
+        }));
+
+        const option = {
+          title: {
+            text: metric.toUpperCase(),
+            left: "right",
+            textStyle: { fontSize: 16, fontWeight: 600, color: "#000" },
+          },
+          tooltip: { trigger: "axis" },
+          legend: {
+            top: 10,
+            data: experiments,
+            textStyle: { fontSize: 12 },
+          },
+          grid: { top: 60, left: 50, right: 20, bottom: 40 },
+          xAxis: {
+            type: "value",
+            name: "Step",
+            min: "dataMin",
+            max: "dataMax",
+          },
+          yAxis: {
+            type: "value",
+            name: "Value",
+          },
+          dataZoom: [
+            { type: "inside" },
+            { type: "slider", height: 15 },
+          ],
+          series,
+        };
+
+        return (
+          <div
+            key={metric}
+            className="bg-white shadow-lg rounded-xl p-4 border border-gray-200"
+          >
+            <ReactECharts
+              option={option}
+              style={{ width: "580px", height: "350px" }}
+              notMerge={true}
+              lazyUpdate={true}
+            />
+          </div>
+        );
+      })}
+    </div>
   );
 }

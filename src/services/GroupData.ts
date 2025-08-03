@@ -1,22 +1,22 @@
 import type { ExperimentLog } from "../interfaces/FileInterface.ts";
-import type {ExperimentGroups} from "../interfaces/GroupedDataInterface.ts";
+import type { MetricGroups } from "../interfaces/GroupedDataInterface.ts";
 
-export function groupData(data: ExperimentLog[]): ExperimentGroups {
-  const groups: ExperimentGroups = {};
+export function groupDataByMetric(data: ExperimentLog[]): MetricGroups {
+  const groups: MetricGroups = {};
 
   for (const log of data) {
-    const experimentId = log.experiment_id;
     const metric = log.metric_name;
+    const experimentId = log.experiment_id;
 
-    if (!groups[experimentId]) {
-      groups[experimentId] = {};
+    if (!groups[metric]) {
+      groups[metric] = {};
     }
 
-    if (!groups[experimentId][metric]) {
-      groups[experimentId][metric] = [];
+    if (!groups[metric][experimentId]) {
+      groups[metric][experimentId] = [];
     }
 
-    groups[experimentId][metric].push(log);
+    groups[metric][experimentId].push(log);
   }
 
   return groups;

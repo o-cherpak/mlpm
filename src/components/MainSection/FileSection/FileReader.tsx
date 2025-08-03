@@ -1,83 +1,66 @@
 import { useEffect, useState } from "react";
 import Papa from "papaparse";
 import type { ExperimentLog } from "../../../interfaces/FileInterface.ts";
-import type { ExperimentGroups } from "../../../interfaces/GroupedDataInterface.ts";
-import { groupData } from "../../../services/GroupData.ts";
-import { Charts } from "./Charts.tsx";
+import { Charts } from "./Charts";
+import { groupDataByMetric } from "../../../services/GroupData";
+import type { MetricGroups } from "../../../interfaces/GroupedDataInterface.ts";
 
 type FileReaderProps = {
   file: File;
 };
 
 export function FileReader({ file }: Readonly<FileReaderProps>) {
-  const [groupedData, setGroupedData] = useState<ExperimentGroups>({});
+  const [groupedData, setGroupedData] = useState<MetricGroups>({});
   const [selectedExperiments, setSelectedExperiments] = useState<string[]>([]);
-  const [selectedMetric, setSelectedMetric] = useState<string>("");
+
+  const METRICS = Object.keys(groupedData);
 
   useEffect(() => {
     Papa.parse<ExperimentLog>(file, {
       header: true,
       skipEmptyLines: true,
+      dynamicTyping: true,
       complete: (results) => {
-        setGroupedData(groupData(results.data));
+        setGroupedData(groupDataByMetric(results.data));
       },
     });
   }, [file]);
 
-  const handleExperimentToggle = (key: string) => {
+  const handleExperimentToggle = (expId: string) => {
     setSelectedExperiments((prev) =>
-      prev.includes(key)
-        ? prev.filter((item) => item !== key)
-        : [...prev, key]
+      prev.includes(expId)
+        ? prev.filter((id) => id !== expId)
+        : [...prev, expId]
     );
   };
 
-  const handleMetricSelect = (key: string) => {
-    setSelectedMetric(key);
-  };
+
+  const allExperiments = Object.keys(
+    groupedData[METRICS[0]] || {}
+  );
 
   return (
-    <div className="flex pt-10 gap-20">
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-2">
-          {Object.keys(groupedData).map((key) => (
-            <label
-              key={key}
-              className={`cursor-pointer border rounded-xl px-4 py-2 transition ${
-                selectedExperiments.includes(key)
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-100 hover:bg-gray-200"
-              }`}
-              onClick={() => handleExperimentToggle(key)}
-            >
-              {key}
-            </label>
-          ))}
-        </div>
-
-        <div className="flex flex-col gap-2">
-          {Object.keys(groupedData).length > 0 &&
-            Object.keys(groupedData["exp_1"]).map((key) => (
-              <label
-                key={key}
-                className={`cursor-pointer border rounded-xl px-4 py-2 transition ${
-                  selectedMetric === key
-                    ? "bg-green-500 text-white"
-                    : "bg-gray-100 hover:bg-gray-200"
-                }`}
-                onClick={() => handleMetricSelect(key)}
-              >
-                {key}
-              </label>
-            ))}
-        </div>
+    <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-wrap wrap py-10 gap-3">
+        {allExperiments.map((expId) => (
+          <button
+            key={expId}
+            onClick={() => handleExperimentToggle(expId)}
+            className={`px-4 py-2 rounded-xl border ${
+              selectedExperiments.includes(expId)
+                ? "bg-blue-500 text-white"
+                : "bg-gray-100 hover:bg-gray-200"
+            }`}
+          >
+            {expId}
+          </button>
+        ))}
       </div>
 
-
       <Charts
-        groupedData={groupedData}
-        selectedExperiments={selectedExperiments}
-        selectedMetrics={selectedMetric}
+        data={groupedData}
+        metrics={METRICS}
+        experiments={selectedExperiments}
       />
     </div>
   );

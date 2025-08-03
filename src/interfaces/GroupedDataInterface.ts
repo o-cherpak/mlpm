@@ -1,9 +1,9 @@
 import type {ExperimentLog} from "./FileInterface.ts";
 
-export interface ExperimentGroups {
-  [experimentId: string]: {
-    [metric: string]: ExperimentLog[];
-  }
+export interface MetricGroups {
+  [metric: string]: {
+    [experimentId: string]: ExperimentLog[];
+  };
 }
 
 
