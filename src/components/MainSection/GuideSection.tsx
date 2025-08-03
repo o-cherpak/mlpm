@@ -26,7 +26,8 @@ export function GuideSection() {
     <section className="py-16 px-2 lg:px-16">
       <div className="max-w-5xl mx-0 lg:mx-auto text-center mb-12">
         <h2
-          className="text-4xl font-extrabold mb-4 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+          className="text-4xl font-extrabold mb-4 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600
+          bg-clip-text text-transparent">
           How to Use This Dashboard
         </h2>
 

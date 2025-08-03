@@ -8,8 +8,6 @@ interface ChartsProps {
   experiments: string[];
 }
 
-const COLORS = ["#5470C6", "#91CC75", "#EE6666", "#FAC858"];
-
 export function Charts({data, metrics, experiments}: Readonly<ChartsProps>) {
   if (!metrics || metrics.length === 0) {
     return (
@@ -24,14 +22,13 @@ export function Charts({data, metrics, experiments}: Readonly<ChartsProps>) {
       {metrics.map((metric) => {
         const metricData = data[metric] || {};
 
-        const series = experiments.map((expId, idx) => ({
+        const series = experiments.map((expId) => ({
           name: expId,
           type: "line",
           showSymbol: false,
           data: metricData[expId]
             ? metricData[expId].map((log) => [log.step, log.value])
             : [],
-          color: COLORS[idx % COLORS.length],
           animation: false,
         }));
 
