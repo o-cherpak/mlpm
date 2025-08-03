@@ -1,4 +1,5 @@
 import ReactECharts from "echarts-for-react";
+import {ClipLoader} from "react-spinners";
 
 interface ExperimentLog {
   experiment_id: string;
@@ -23,7 +24,11 @@ const COLORS = ["#5470C6", "#91CC75", "#EE6666", "#FAC858"];
 
 export function Charts({data, metrics, experiments}: Readonly<ChartsProps>) {
   if (!metrics || metrics.length === 0) {
-    return <p className="text-gray-500">Loading...</p>;
+    return (
+      <div className="flex justify-center items-center h-40">
+        <ClipLoader color="#4F46E5" size={40}/>
+      </div>
+    );
   }
 
   return (
