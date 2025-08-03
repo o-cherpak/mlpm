@@ -4,6 +4,7 @@ import type { ExperimentLog } from "../../../interfaces/FileInterface.ts";
 import { Charts } from "./Charts";
 import { groupDataByMetric } from "../../../services/GroupData";
 import type { MetricGroups } from "../../../interfaces/GroupedDataInterface.ts";
+import {ExperimentsButton} from "./ExperimentsButton.tsx";
 
 type FileReaderProps = {
   file: File;
@@ -34,28 +35,18 @@ export function FileReader({ file }: Readonly<FileReaderProps>) {
     );
   };
 
-
   const allExperiments = Object.keys(
     groupedData[METRICS[0]] || {}
   );
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="flex flex-wrap wrap py-10 gap-3">
-        {allExperiments.map((expId) => (
-          <button
-            key={expId}
-            onClick={() => handleExperimentToggle(expId)}
-            className={`px-4 py-2 rounded-xl border ${
-              selectedExperiments.includes(expId)
-                ? "bg-blue-500 text-white"
-                : "bg-gray-100 hover:bg-gray-200"
-            }`}
-          >
-            {expId}
-          </button>
-        ))}
-      </div>
+
+      <ExperimentsButton
+        allExperiments={allExperiments}
+        selectedExperiments={selectedExperiments}
+        onClick={handleExperimentToggle}
+      />
 
       <Charts
         data={groupedData}

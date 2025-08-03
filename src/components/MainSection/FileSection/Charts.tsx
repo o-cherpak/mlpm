@@ -21,7 +21,7 @@ interface ChartsProps {
 
 const COLORS = ["#5470C6", "#91CC75", "#EE6666", "#FAC858"];
 
-export function Charts({ data, metrics, experiments }: ChartsProps) {
+export function Charts({data, metrics, experiments}: Readonly<ChartsProps>) {
   if (!metrics || metrics.length === 0) {
     return <p className="text-gray-500">Loading...</p>;
   }
@@ -46,15 +46,15 @@ export function Charts({ data, metrics, experiments }: ChartsProps) {
           title: {
             text: metric.toUpperCase(),
             left: "right",
-            textStyle: { fontSize: 16, fontWeight: 600, color: "#000" },
+            textStyle: {fontSize: 16, fontWeight: 600, color: "#000"},
           },
-          tooltip: { trigger: "axis" },
+          tooltip: {trigger: "axis"},
           legend: {
             top: 10,
             data: experiments,
-            textStyle: { fontSize: 12 },
+            textStyle: {fontSize: 12},
           },
-          grid: { top: 60, left: 50, right: 20, bottom: 40 },
+          grid: {top: 60, left: 50, right: 20, bottom: 40},
           xAxis: {
             type: "value",
             name: "Step",
@@ -66,8 +66,8 @@ export function Charts({ data, metrics, experiments }: ChartsProps) {
             name: "Value",
           },
           dataZoom: [
-            { type: "inside" },
-            { type: "slider", height: 15 },
+            {type: "inside"},
+            {type: "slider", height: 15},
           ],
           series,
         };
@@ -79,7 +79,7 @@ export function Charts({ data, metrics, experiments }: ChartsProps) {
           >
             <ReactECharts
               option={option}
-              style={{ width: "580px", height: "350px" }}
+              style={{width: "580px", height: "350px"}}
               notMerge={true}
               lazyUpdate={true}
             />
