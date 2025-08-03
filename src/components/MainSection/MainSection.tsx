@@ -4,7 +4,7 @@ import {GuideSection} from "./GuideSection.tsx";
 export function MainSection() {
   return (
     <main
-      className="flex gap-4 flex-col items-center justify-center px-6 md:px-20 py-16 bg-gradient-to-b from-gray-50 to-white">
+      className="flex gap-4 flex-col items-center justify-center px-6 md:px-20 py-16 bg-white bg-[url('https://www.toptal.com/designers/subtlepatterns/uploads/white-waves.png')] bg-repeat">
       <div className="max-w-3xl text-center">
         <h1
           className="text-4xl md:text-6xl font-extrabold

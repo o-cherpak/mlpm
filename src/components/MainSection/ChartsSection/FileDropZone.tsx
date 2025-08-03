@@ -26,7 +26,7 @@ export function FileDropzone({setFileParam}: Readonly<FileDropzoneProps>) {
     <div
       onDrop={handleDrop}
       onDragOver={(e) => e.preventDefault()}
-      className={`border-2 w-full space-y-4 md:w-2/3 ${file ? "pb-8" : "pb-10 lg:pb-20"} 
+      className={`border-2 w-full bg-white space-y-4 md:w-2/3 ${file ? "pb-8" : "pb-10 lg:pb-20"} 
       border-dashed border-gray-300 shadow-lg rounded-2xl lg:p-8 p-6 text-center hover:cursor-pointer`}
     >
       <p
@@ -47,7 +47,7 @@ export function FileDropzone({setFileParam}: Readonly<FileDropzoneProps>) {
       <label
         htmlFor="fileInput"
         className={`py-4 px-4 lg:px-8 bg-blue-600 ${file && "bg-blue-800"} 
-        text-white rounded-full cursor-pointer hover:bg-blue-700 transition`}
+        text-white rounded-2xl cursor-pointer hover:bg-blue-700 transition`}
       >
         {file ? "Re-choose File" : "Choose File"}
       </label>

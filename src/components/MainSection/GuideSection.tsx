@@ -23,7 +23,11 @@ export function GuideSection() {
   ];
 
   return (
-    <section className="py-16 px-2 lg:px-16">
+    <section className="relative py-16 px-2 lg:px-16">
+      <div className="absolute top-40 left-20 w-80 h-80 bg-blue-200 rounded-full opacity-20 blur-3xl"></div>
+      <div className="absolute top-40 right-20 w-80 h-80 bg-purple-200 rounded-full opacity-20 blur-3xl"></div>
+
+
       <div className="max-w-5xl mx-0 lg:mx-auto text-center mb-12">
         <h2
           className="text-4xl font-extrabold mb-4 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600
