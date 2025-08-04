@@ -68,7 +68,6 @@ export function Charts({data, metrics, experiments}: Readonly<ChartsProps>) {
           >
             <ReactECharts
               option={option}
-              style={{width: "100%", height: "320px"}}
               notMerge={true}
               lazyUpdate={true}
             />
