@@ -1,7 +1,7 @@
 Simple frontend application that allows users to upload, inspect and compare experiment logs.
 
 Format file csv :
-experiment_id: a string identifying a particular training run;
+- experiment_id: a string identifying a particular training run;
 - metric_name: the name of the tracked metric;
 - step: the training step at which the metric was logged (e.g. 1, 2,3);
 - value: the value of the metric at that step;
